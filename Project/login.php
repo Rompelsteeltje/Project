@@ -1,22 +1,29 @@
 <?php 
 	include('sql.php');
 	include('errors.php');
+	
 	echo $_SESSION['klas'];
+	
 	getKlasNames($_SESSION['klas']);
 	$names = $_SESSION['namen'];
-	echo $names[2]['vn'];
-	$length = count($names) - 1;
-	echo $length;
-	$currentType = "";
-	$currentSubmit = "inlog1";
 	
-	if(isset($_POST['inlog1'])){
+	echo $names[2]['vn'];
+	
+	$length = count($names) - 1;
+	
+	echo $length;
+	
+	$currentSubmitLogin = "inlog1";
+	
+	if(isset($_POST['inlog1']))
+	{
 		unset($_SESSION['klasConfirm']);
-		$currentSubmit = "inlog2";
+		$currentSubmitLogin = "inlog2";
 	}
-	if(isset($_POST['inlog2'])){
+	if(isset($_POST['inlog2']))
+	{
 		$_SESSION['userNumber'] = $_POST['selectNamen'];
-		header('location: docent.php');
+		header('location: vragen.php');
 	}	
 ?>
 <html>
@@ -40,7 +47,7 @@
 				?>
 				</select>
 				<?php } ?>
-				<input type="submit" name="<?php echo $currentSubmit ?>">
+				<input type="submit" name="<?php echo $currentSubmitLogin ?>">
 			
 				
 			</form>

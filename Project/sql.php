@@ -66,7 +66,7 @@
 		}
 	}
 	
-	//Dit hoort bij docent.php
+	//Dit hoort bij docentlogin.php
 	if(isset($_POST['docentLogin'])) 
 	{
 		if(!isset($_POST['naam'])) {$_POST['naam'] = "";};
@@ -100,5 +100,47 @@
 				array_push($errors, "Foute naam of wachtwoord");
 			}
 		}
+	}
+	
+	//Dit hoort bij docent.php
+	function makeCode($klas)
+	{
+		$database = mysqli_connect("localhost","root","usbw","project");
+		$query = "SELECT `klas` FROM leerlingen WHERE klas = '$klas'";
+		$classLength = mysqli_query($database, $query)->num_rows;
+		$codes = [];
+		
+		for($i = 0; $i < $classLength; $i++)
+		{
+			$codesNotSame = true;
+			
+			while($codesNotSame)
+			{
+				$codesNotSame = false;
+				$code = "";
+				
+				for ($j = 0; $j <= 5; $j++)
+				{
+					$code .= rand(0, 9);
+				}
+				
+				for ($k = 0; $k < count($codes); $k++)
+				{
+					if ($code == $codes[$k])
+					{
+						$codesNotSame = true;
+					}
+				}
+			}
+			
+			$codes = array_push($codes, $code);
+			
+		}
+		
+		
+		echo "<pre>";
+		var_dump($codes);
+		echo "</pre>";
+		$query1 = "INSERT INTO `code` (`code`, `klas`) VALUES ('6969', '1A');";
 	}
 ?>

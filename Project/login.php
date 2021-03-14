@@ -1,3 +1,24 @@
+<?php 
+	include('sql.php');
+	include('errors.php');
+	echo $_SESSION['klas'];
+	getKlasNames($_SESSION['klas']);
+	$names = $_SESSION['namen'];
+	echo $names[2]['vn'];
+	$length = count($names) - 1;
+	echo $length;
+	$currentType = "";
+	$currentSubmit = "inlog1";
+	
+	if(isset($_POST['inlog1'])){
+		unset($_SESSION['klasConfirm']);
+		$currentSubmit = "inlog2";
+	}
+	if(isset($_POST['inlog2'])){
+		$_SESSION['userNumber'] = $_POST['selectNamen'];
+		header('location: docent.php');
+	}	
+?>
 <html>
 	<head>
 		<title>Login</title>
@@ -8,23 +29,20 @@
 				<h2>vul je gegevens in<h2>
 			</div>
 			
-			<form action="/login.php" method="post">
-			<?php include('sql.php') ?>
-			<?php include('errors.php') ?>
-				<div>
-					<label for="naam">naam : </label>
-					<input type="text" name="naam" required>
-				</div>
+			<form action="/Project/login.php" method="post">
+				<?php if(!isset($_SESSION['klasConfirm'])){?>
+				<select name="selectNamen">
+				<?php 
+					for($i=0; $i<=$length; $i++){
+						echo '<option value="' . $names[$i]['llnr'] . '">' . $names[$i]['vn'] . ' ' . $names[$i]['tv'] . ' ' . $names[$i]['an'] . '</option>';
+					}
+
+				?>
+				</select>
+				<?php } ?>
+				<input type="submit" name="<?php echo $currentSubmit ?>">
+			
 				
-				<div>
-					<label for="klas">klas : </label>
-					<input type="text" name="klas" required> 
-				</div>
-				
-				<div>
-					<label for="geslacht">geslacht : </label>
-					<input type="text" name="gesalcht" required> 
-				</div>
 			</form>
 		</div>		
 	</body>

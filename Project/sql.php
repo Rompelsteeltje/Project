@@ -3,7 +3,11 @@
 
 	$database = mysqli_connect("localhost","root","usbw","project");
 	$errors = [];
-	
+	/*
+	$newpw = md5("69");
+	$query = "INSERT INTO docent (naam, ww) VALUES ('van Dijk', '$newpw')";
+	mysqli_query($database, $query);
+	*/
 	//Dit hoort bij code.php
 	if(!isset($_POST['code'])) {$code = 0;};
 	if(isset($_POST['code'])) {$code = $_POST['code'];};
@@ -63,37 +67,37 @@
 	}
 	
 	//Dit hoort bij docent.php
-	if(isset($_POST['login'])) 
+	if(isset($_POST['docentLogin'])) 
 	{
-		if(!isset($_POST['un'])) {$_POST['un'] = "";};
-		if(!isset($_POST['pw'])) {$_POST['pw'] = "";};
+		if(!isset($_POST['naam'])) {$_POST['naam'] = "";};
+		if(!isset($_POST['ww'])) {$_POST['ww'] = "";};
 		
-		$un = mysqli_real_escape_string($db,$_POST['un']);
-		$pw = mysqli_real_escape_string($db,$_POST['pw']);
+		$naam = mysqli_real_escape_string($database,$_POST['naam']);
+		$ww = mysqli_real_escape_string($database,$_POST['ww']);
 
-		if(empty($un)) 
+		if(empty($naam)) 
 		{
-			array_push($errors, "Please fill in Username");
+			array_push($errors, "Vul je naam in");
 		}
-		if(empty($pw)) 
+		if(empty($ww)) 
 		{
-			array_push($errors, "Please fill in Password");
+			array_push($errors, "Vul je wachtwoord in");
 		}
 		if(count($errors) == 0 ) 
 		{
-			$pw = md5($pw);
-			$query = "SELECT * FROM user WHERE un = '". $un . "' AND pw = '" . $pw . "'";
-			$results = mysqli_query($db, $query);
+			$ww = md5($ww);
+			$query = "SELECT * FROM docent WHERE naam = '". $naam . "' AND ww = '" . $ww . "'";
+			$results = mysqli_query($database, $query);
 
 			if(mysqli_num_rows($results)) 
 			{
-				$_SESSION['un'] = $un;
-				$_SESSION['succes'] = "Logged in";
-				header('location: PWS.php');
+				$_SESSION['naam'] = $naam;
+				$_SESSION['succes'] = "ingelogd";
+				header('location: docent.php');
 			}
 			else
 			{
-				array_push($errors, "Wrong username or password");
+				array_push($errors, "Foute naam of wachtwoord");
 			}
 		}
 	}

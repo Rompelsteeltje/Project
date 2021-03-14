@@ -133,14 +133,21 @@
 				}
 			}
 			
-			$codes = array_push($codes, $code);
-			
+			array_push($codes, $code);
 		}
 		
+		for ($i = 0; $i < $classLength; $i++)
+		{
+			$query1 = "INSERT INTO `code` (`code`, `klas`) VALUES ('$codes[$i]', '$klas');";
+			mysqli_query($database, $query1);
+		}
+	}
+	
+	function destroyCodes($klas)
+	{
+		$database = mysqli_connect("localhost","root","usbw","project");
+		$query = "DELETE `klas` FROM leerlingen WHERE klas = '$klas'";
+		mysqli_query($database, $query);
 		
-		echo "<pre>";
-		var_dump($codes);
-		echo "</pre>";
-		$query1 = "INSERT INTO `code` (`code`, `klas`) VALUES ('6969', '1A');";
 	}
 ?>

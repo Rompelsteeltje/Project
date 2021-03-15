@@ -3,19 +3,16 @@
 	include('errors.php');
 	
 	if(!isset($_SESSION["count"])){$_SESSION["count"] = 0;}
-	if($_SESSION["count"] >= 79){$_SESSION["count"] = 0;}
+	if($_SESSION["count"] > 79){$_SESSION["count"] = 0;}
 	
 	if(isset($_POST[$_SESSION["count"]]))
-	{
-		echo "<br>" . $_SESSION['userNumber'] . "<br>";
-		echo $_SESSION["count"] . "<br>";
-		echo $_POST[$_SESSION['nameAnswer']] . "<br>";
-		
+	{		
 		storeAnswer($_SESSION['userNumber'], $_SESSION["count"], $_POST[$_SESSION['nameAnswer']]);
 		$_SESSION["count"]++;
 	}
-	Makecode("1A");
 	$_SESSION['nameAnswer'] = "vraag" . $_SESSION["count"];
+	$teller = $_SESSION["count"] +1;
+	echo "Vraag " . $teller;
 ?>
 
 <form action="/Project/vragen.php" method="post">

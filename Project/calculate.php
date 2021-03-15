@@ -4,7 +4,7 @@
 	{
 		$resultsByLlnr = [];
 		
-		while (isset($results[80]))
+		while (isset($results[79]))
 		{
 			$subResultsByLlnr = [];
 			
@@ -35,12 +35,15 @@
 		public $socialeVaardigheid = ["000000011112223344556778", "000000011111112233455678" ];
 		public $socialeWenselijkheid = ["000000012234456677889999", "000000012334556677889999" ];
 		public $definiteResults;
+		public $geslacht;
 		
 		function __construct($results)
 		{
 			$data = $this->alterResults($results);
 			$results = $this->calculatePoints($data);
 			$this->llnr = $data[0][0];
+			$this->geslacht = $data[0][1];
+			
 			
 			$normC = $this->readNormering("leertaakgerichtheid", $this->leertaakgerichtheid[0], $this->leertaakgerichtheid[1]);
 			$normH = $this->readNormering("concentratie", $this->concentratie[0], $this->concentratie[1]);

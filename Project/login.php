@@ -2,16 +2,13 @@
 	include('sql.php');
 	include('errors.php');
 	
-	echo $_SESSION['klas'];
 	
 	getKlasNames($_SESSION['klas']);
 	$names = $_SESSION['namen'];
 	
-	echo $names[2]['vn'];
 	
 	$length = count($names) - 1;
 	
-	echo $length;
 	
 	$currentSubmitLogin = "inlog1";
 	
@@ -37,7 +34,8 @@
 			</div>
 			
 			<form action="/Project/login.php" method="post">
-				<?php if(!isset($_SESSION['klasConfirm'])){?>
+				<?php if(!isset($_SESSION['klasConfirm']))
+				{?>
 				<select name="selectNamen">
 				<?php 
 					for($i=0; $i<=$length; $i++){
@@ -46,8 +44,14 @@
 
 				?>
 				</select>
-				<?php } ?>
-				<input type="submit" name="<?php echo $currentSubmitLogin ?>">
+				<?php 
+				} 
+				else
+				{
+					echo "<h1> Is " . $_SESSION['klas'] . " jouw klas?</h1> <br>";
+				}
+				?>
+				<input type="submit" name="<?php echo $currentSubmitLogin ?>" value="Volgende">
 			
 				
 			</form>

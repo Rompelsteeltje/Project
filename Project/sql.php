@@ -3,11 +3,7 @@
 
 	$database = mysqli_connect("localhost","root","usbw","project");
 	$errors = [];
-	/*
-	$newpw = md5("69");
-	$query = "INSERT INTO docent (naam, ww) VALUES ('van Dijk', '$newpw')";
-	mysqli_query($database, $query);
-	*/
+	
 	//Dit hoort bij code.php
 	if(!isset($_POST['code'])) {$code = 0;};
 	if(isset($_POST['code'])) {$code = $_POST['code'];};
@@ -40,7 +36,6 @@
 		$database = mysqli_connect("localhost","root","usbw","project");
 		$query = "SELECT Vraag FROM vragen WHERE ID = '$id'";
 		$result = mysqli_query($database, $query)->fetch_object()->Vraag;
-		
 		echo $result;
 	}
 	
@@ -167,7 +162,7 @@
 	function getResults($klas)
 	{
 		$database = mysqli_connect("localhost","root","usbw","project");
-		$query = mysqli_query($database, "SELECT leerlingen.geslacht, antwoorden.*, vragen.Soort, vragen.Categorie FROM `leerlingen`, `antwoorden`, `vragen` WHERE antwoorden.ID = vragen.ID AND leerlingen.llnr = antwoorden.llnr ORDER BY llnr");
+		$query = mysqli_query($database, "SELECT leerlingen.geslacht, antwoorden.*, vragen.Soort, vragen.Categorie FROM `leerlingen`, `antwoorden`, `vragen` WHERE antwoorden.ID = vragen.ID AND leerlingen.llnr = antwoorden.llnr AND leerlingen.klas = '$klas' ORDER BY llnr");
 		
 		$_SESSION['results'] = array();
 		
@@ -181,6 +176,23 @@
 		echo "</pre>";
 		*/
 		return $_SESSION['results'];
+	}
+	function countllnr($klas)
+	{
+		$database = mysqli_connect("localhost","root","usbw","project");
+		$query = "SELECT COUNT(`klas`) AS klas FROM leerlingen WHERE klas = '$klas'";
+		$_SESSION['countllnr']= mysqli_query($database, $query)->fetch_object()->klas;
+	}
+	function getNamellnr($llnr)
+	{
+		$database = mysqli_connect("localhost","root","usbw","project");
+		$query = mysqli_query($database,"SELECT `vn`, `tv`, `an`, `llnr` FROM `leerlingen` WHERE llnr = '$llnr'")->fetch_object();
+		$vn = $query->vn;
+		$tv = $query->tv;
+		$an = $query->an;
+		$_SESSION['leerlingName'] = $vn . " " . $tv . " " . $an;
+
+		
 	}
 ?>
 

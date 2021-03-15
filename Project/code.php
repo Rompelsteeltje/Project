@@ -1,4 +1,4 @@
-<HTML>
+<html>
 	<head>
 		<title>Login</title>
 	</head>
@@ -20,10 +20,10 @@
 				
 			</form>
 			<div>
-				<form action="/Project/docent.php" method ="post">
+				<form action="/Project/docentlogin.php" method ="post">
 					<input type="submit" name="docent" value="Ik ben docent(e)">
 				</form>
 			</div>
 		</div>		
 	</body>
-</HTML>
+</html>

@@ -93,7 +93,7 @@
 			{
 				$_SESSION['naam'] = $naam;
 				$_SESSION['succes'] = "ingelogd";
-				header('location: docent.php');
+				header('location: docenthome.php');
 			}
 			else
 			{
@@ -102,7 +102,7 @@
 		}
 	}
 	
-	//Dit hoort bij docent.php
+	//Dit hoort bij docentcode.php
 	function makeCode($klas)
 	{
 		$database = mysqli_connect("localhost","root","usbw","project");
@@ -135,7 +135,7 @@
 			
 			array_push($codes, $code);
 		}
-		
+		$_SESSION['codes'] =  $codes;
 		for ($i = 0; $i < $classLength; $i++)
 		{
 			$query1 = "INSERT INTO `code` (`code`, `klas`) VALUES ('$codes[$i]', '$klas');";
@@ -146,8 +146,30 @@
 	function destroyCodes($klas)
 	{
 		$database = mysqli_connect("localhost","root","usbw","project");
-		$query = "DELETE `klas` FROM leerlingen WHERE klas = '$klas'";
+		$query = "DELETE `code` FROM code WHERE klas = '$klas'";
 		mysqli_query($database, $query);
 		
 	}
+	function getKlassen()
+	{
+		$database = mysqli_connect("localhost","root","usbw","project");
+		$query = mysqli_query($database,"SELECT DISTINCT klas FROM leerlingen ORDER BY klas");
+		
+		$_SESSION['docentKlassen'] = array();
+		
+		while($row  = mysqli_fetch_assoc($query))
+		{
+			$_SESSION['docentKlassen'][]  = $row;
+		}
+		
+	}
+	//Dit hoort bij docentleerlingen.php
+	function getResults($klas)
+	{
+		$database = mysqli_connect("localhost","root","usbw","project");
+		$query = "SELECT antwoorden.*, vragen.Soort, vragen.Categorie FROM `antwoorden`, `vragen` WHERE antwoorden.ID = vragen.ID";
+		
+		
+	}
+	
 ?>

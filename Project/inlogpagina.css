@@ -1,0 +1,151 @@
+.body {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	font-family: "Ubuntu",sans-serif;
+    color: #4a4a4a;
+    font-weight: 400;
+    font-size: 16px;
+
+}
+
+#header {
+	position: sticky;
+	display: block;
+	width: 100%;
+	height: 50px;
+	text-align: center;
+	background-color: #017781;
+	color: white;
+	font-size: 40px;
+	padding: 5px 0px 5px 0px ;
+}
+
+#wrapper {
+	width: 100%;
+	height: 100%;
+	background-image: url(achtergrond/achtergrond.png);
+	background-repeat: repeat;
+	padding: 0px;
+}
+
+#main {
+	position: absolute;
+	padding: 10px;
+	margin-left: 15%;
+	width: 70%;
+	height: 100%;
+	background-color: white;
+	font-size: 30px;
+	text-align: center;
+}
+
+#codeholder {
+	text-align: center;
+}
+
+#code{
+	margin-left:-15%;
+	width: 30%;
+	padding: 5px 10px;
+	margin-top:10px;
+	box-sizing: border-box;
+	border: 3px solid #E60285;
+	border-radius: 10px 0px 0px 10px;
+	font-size: 20px;
+}
+
+#code:focus {
+	outline:none;
+}
+
+#select:focus {
+	outline:none;
+}
+
+::placeholder {
+	color:#E60285;
+}
+
+#submit1 {
+	position: absolute;
+	width:15%;
+	margin-left: 0px;
+	margin-top:10px;
+	padding: 5px 10px;
+	border-radius: 0px 10px 10px 0px;
+	border: 3px solid #E60285;
+	background-color: #E60285;
+	color: white;
+	font-size: 20px;
+}
+
+#submit2 {
+	margin-top:10px;
+	padding: 5px 10px;
+	border-radius: 10px;
+	border: 3px solid #E60285;
+	background-color: #E60285;
+	color: white;
+	font-size: 20px;
+}
+
+#submit3 {
+	margin-top:10px;
+	padding: 5px 10px;
+	border-radius: 8px;
+	border: 1px solid #017781;
+	color: black;
+}
+
+#select {
+	margin-left:-15%;
+	width: 15%;
+	padding: 5px 10px;
+	margin-top:10px;
+	border: 3px solid #E60285;
+	border-radius: 10px 0px 0px 10px;
+	font-size: 19px;
+}
+
+
+#footer {
+	position: sticky;
+	display: block;
+	width: 100%;
+	height: 50px;
+	text-align: center;
+	background-color: #017781;
+	color: white;
+	font-size: 40px;
+	padding: 5px 0px 5px 0px ;
+}
+
+#tabel {
+	border-collapse: collapse;
+	width: 30%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#tabel td, #tabel th {
+	border: 1px solid #ddd;
+	padding: 5px;
+} 
+
+#tabel tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+#tabel th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #E60285;
+  color: white;
+}
+
+#radio {
+	text-align: none;
+	margin-left: 5px;
+}

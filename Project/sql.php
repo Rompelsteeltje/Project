@@ -134,13 +134,12 @@
 			}
 			
 			array_push($codes, $code);
-		}
-		$_SESSION['codes'] =  $codes;
-		for ($i = 0; $i < $classLength; $i++)
-		{
+			
 			$query1 = "INSERT INTO `code` (`code`, `klas`) VALUES ('$codes[$i]', '$klas');";
 			mysqli_query($database, $query1);
 		}
+		
+		$_SESSION['codes'] =  $codes;
 	}
 	
 	function destroyCodes($klas)
@@ -163,13 +162,25 @@
 		}
 		
 	}
+	
 	//Dit hoort bij docentleerlingen.php
 	function getResults($klas)
 	{
 		$database = mysqli_connect("localhost","root","usbw","project");
-		$query = "SELECT antwoorden.*, vragen.Soort, vragen.Categorie FROM `antwoorden`, `vragen` WHERE antwoorden.ID = vragen.ID";
+		$query = mysqli_query($database, "SELECT leerlingen.geslacht, antwoorden.*, vragen.Soort, vragen.Categorie FROM `leerlingen`, `antwoorden`, `vragen` WHERE antwoorden.ID = vragen.ID AND leerlingen.llnr = antwoorden.llnr ORDER BY llnr");
 		
+		$_SESSION['results'] = array();
 		
+		while($row = mysqli_fetch_assoc($query))
+		{
+			$_SESSION['results'][]  = $row;
+		}
+		/*
+		echo "<pre>";
+		var_dump($_SESSION['results']);
+		echo "</pre>";
+		*/
+		return $_SESSION['results'];
 	}
-	
 ?>
+

@@ -1,4 +1,3 @@
-
 <form action="docentcode.php">
 	<input type="submit" name="goMakeCodes" value="Maak login codes aan">
 </form>

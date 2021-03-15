@@ -1,4 +1,4 @@
-<html>
+<HTML>
 	<head>
 		<title>Login</title>
 	</head>
@@ -10,6 +10,7 @@
 			<form action="/Project/code.php" method="post">
 				<?php include('sql.php'); ?>
 				<?php include('errors.php') ?>
+				<?php include('calculate.php'); ?>
 				<div>
 					<label for="code">code : </label>
 					<input type="text" name="code" > 
@@ -26,4 +27,4 @@
 			</div>
 		</div>		
 	</body>
-</html>
+</HTML>

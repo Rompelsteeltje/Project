@@ -34,33 +34,38 @@
 		public $zelfvertrouwenProefwerk = ["000000011122334455667789", "000000011112233445566789" ];
 		public $socialeVaardigheid = ["000000011112223344556778", "000000011111112233455678" ];
 		public $socialeWenselijkheid = ["000000012234456677889999", "000000012334556677889999" ];
-	
+		public $definiteResults;
+		
 		function __construct($results)
 		{
-			$results = $this->alterResults($results);
-			$norm = $this->readNormering("leertaakgerichtheid V", $this->leertaakgerichtheid[0], $this->leertaakgerichtheid[1]);
-			$results = $this->calculatePoints($results);
+			$data = $this->alterResults($results);
+			$results = $this->calculatePoints($data);
+			$this->llnr = $data[0][0];
 			
 			$normC = $this->readNormering("leertaakgerichtheid", $this->leertaakgerichtheid[0], $this->leertaakgerichtheid[1]);
 			$normH = $this->readNormering("concentratie", $this->concentratie[0], $this->concentratie[1]);
 			$normL = $this->readNormering("huiswerkattitude", $this->huiswerkattitude[0], $this->huiswerkattitude[1]);
-			$normP = $this->readNormering("leertaakgerichtheid", $this->leertaakgerichtheid[0], $this->leertaakgerichtheid[1]);
-			$normR = $this->readNormering("leertaakgerichtheid", $this->leertaakgerichtheid[0], $this->leertaakgerichtheid[1]);
-			$normS = $this->readNormering("leertaakgerichtheid", $this->leertaakgerichtheid[0], $this->leertaakgerichtheid[1]);
-			$normU = $this->readNormering("leertaakgerichtheid", $this->leertaakgerichtheid[0], $this->leertaakgerichtheid[1]);
-			$normV = $this->readNormering("leertaakgerichtheid", $this->leertaakgerichtheid[0], $this->leertaakgerichtheid[1]);
-			$normW = $this->readNormering("leertaakgerichtheid", $this->leertaakgerichtheid[0], $this->leertaakgerichtheid[1]);
-			$normZ = $this->readNormering("leertaakgerichtheid", $this->leertaakgerichtheid[0], $this->leertaakgerichtheid[1]);
+			$normP = $this->readNormering("plezierOpSchool", $this->plezierOpSchool[0], $this->plezierOpSchool[1]);
+			$normR = $this->readNormering("sociaalAanvaardVoelen", $this->sociaalAanvaardVoelen[0], $this->sociaalAanvaardVoelen[1]);
+			$normS = $this->readNormering("relatieMetDocenten", $this->relatieMetDocenten[0], $this->relatieMetDocenten[1]);
+			$normU = $this->readNormering("uitdrukkingsvaardigheid", $this->uitdrukkingsvaardigheid[0], $this->uitdrukkingsvaardigheid[1]);
+			$normV = $this->readNormering("zelfvertrouwenProefwerk", $this->zelfvertrouwenProefwerk[0], $this->zelfvertrouwenProefwerk[1]);
+			$normW = $this->readNormering("socialeVaardigheid", $this->socialeVaardigheid[0], $this->socialeVaardigheid[1]);
+			$normZ = $this->readNormering("socialeWenselijkheid", $this->socialeWenselijkheid[0], $this->socialeWenselijkheid[1]);
 			
-			
-			echo "<pre>";
-				var_dump($norm);
-			echo "</pre>";
-			
-			echo "<pre>";
-				var_dump($results);
-			echo "</pre>";
-			
+			$this->definiteResults = 
+			[
+				$this->calculateNormering($normC, $results[0], $data[0][1]),
+				$this->calculateNormering($normH, $results[1], $data[0][1]),
+				$this->calculateNormering($normL, $results[2], $data[0][1]),
+				$this->calculateNormering($normP, $results[3], $data[0][1]),
+				$this->calculateNormering($normR, $results[4], $data[0][1]),
+				$this->calculateNormering($normS, $results[5], $data[0][1]),
+				$this->calculateNormering($normU, $results[6], $data[0][1]),
+				$this->calculateNormering($normV, $results[7], $data[0][1]),
+				$this->calculateNormering($normW, $results[8], $data[0][1]),
+				$this->calculateNormering($normZ, $results[9], $data[0][1]),
+			];
 		}
 		
 		function alterResults($results)
@@ -202,6 +207,29 @@
 			array_push($normeringen, $subNormeringenV, $subNormeringenM);
 			
 			return $normeringen;
+		}
+		
+		public function calculateNormering($normering, $result, $gender)
+		{
+			if ($gender == "v")
+			{
+				$normering = $normering[1];
+			}
+			else
+			{
+				$normering = $normering[2];
+			}
+			
+			
+			for ($i = 0; $i < 24; $i++)
+			{
+				if ($result[0] == $normering[$i][0])
+				{
+					$newResult = [$result[1], $normering[$i][1]];
+				}
+			}
+			
+			return $newResult;
 		}
 		
 	}

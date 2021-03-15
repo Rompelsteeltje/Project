@@ -14,7 +14,7 @@
 		storeAnswer($_SESSION['userNumber'], $_SESSION["count"], $_POST[$_SESSION['nameAnswer']]);
 		$_SESSION["count"]++;
 	}
-	
+	Makecode("1A");
 	$_SESSION['nameAnswer'] = "vraag" . $_SESSION["count"];
 ?>
 

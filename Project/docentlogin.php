@@ -8,7 +8,7 @@
 				<h2>vul je gegevens in<h2>
 			</div>
 			
-			<form action="docentlogin.php" method="post">
+			<form action="/Project/docentlogin.php" method="post">
 			<?php include('sql.php') ?>
 			<?php include('errors.php') ?>
 				<div>
